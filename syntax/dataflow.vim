@@ -15,18 +15,19 @@ endif
 
 syntax keyword dataflowKeyword  diagram boundary function database io
 
-syntax match  dataflowArrow           "<-\|->"
-syntax region dataflowString          start=+"+ end=+"\|$+
-syntax match  dataflowKey             /\<[a-zA-Z_$][0-9a-zA-Z_$]*\>\(\s*:\)\@=/
-syntax region dataflowTextBlock       start="|" end="$"
-syntax region dataflowMap             start="{" end="}" fold transparent contains=dataflowKey
-syntax region dataflowChildren        start="\[" end="\]" fold transparent contains=dataflowArrow,dataflowString,dataflowMap,dataflowChildren
+syntax region dataflowString          start=+"+ end=+"$+
+syntax region dataflowTextBlock       start=+`+ end=+`+
+syntax match  dataflowArrow           "<-\|->\|="
+syntax match  dataflowEquals          "="
+syntax match  dataflowAttrName        "\w\+ =" contains=dataflowEquals
+syntax region dataflowMap             start="{" end="}" fold transparent contains=dataflowAttrName,dataflowArrow,dataflowString,dataflowMultiLineString,dataflowMap,dataflowOp
 
-hi link dataflowKeyword   Keyword
-hi link dataflowArrow     Operator
-hi link dataflowString    String
-hi link dataflowTextBlock Special
-hi link dataflowKey       Constant
+hi link dataflowAttrName        Identifier
+hi link dataflowArrow           Operator
+hi link dataflowEquals          Operator
+hi link dataflowString          String
+hi link dataflowTextBlock       Special
+hi link dataflowKey             Constant
 
 
 let b:current_syntax = "dataflow"
