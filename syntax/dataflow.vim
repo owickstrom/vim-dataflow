@@ -15,6 +15,7 @@ endif
 
 syntax keyword dataflowKeyword  diagram boundary function database io
 
+syntax region dataflowComment         start="/\*" end="\*/"
 syntax region dataflowString          start=+"+ end=+"$+
 syntax region dataflowTextBlock       start=+`+ end=+`+
 syntax match  dataflowArrow           "<-\|->\|="
@@ -28,6 +29,7 @@ hi link dataflowEquals          Operator
 hi link dataflowString          String
 hi link dataflowTextBlock       Special
 hi link dataflowKey             Constant
+hi link dataflowComment         Comment
 
 
 let b:current_syntax = "dataflow"
