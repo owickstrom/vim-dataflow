@@ -16,12 +16,12 @@ endif
 syntax keyword dataflowKeyword  diagram boundary function database io
 
 syntax region dataflowComment         start="/\*" end="\*/"
-syntax region dataflowString          start=+"+ end=+"$+
+syntax region dataflowString          start=+"+ end=+"+
 syntax region dataflowTextBlock       start=+`+ end=+`+
 syntax match  dataflowArrow           "<-\|->\|="
-syntax match  dataflowEquals          "="
+syntax match  dataflowEquals          "=" contained
 syntax match  dataflowAttrName        "\w\+ =" contains=dataflowEquals
-syntax region dataflowMap             start="{" end="}" fold transparent contains=dataflowAttrName,dataflowArrow,dataflowString,dataflowMultiLineString,dataflowMap,dataflowOp
+syntax match  dataflowBraces          "[{}\[\]]"
 
 hi link dataflowAttrName        Identifier
 hi link dataflowArrow           Operator
